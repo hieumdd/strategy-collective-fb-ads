@@ -8,7 +8,6 @@ export const createValidationMiddleware = (schema: Joi.Schema): Handler => {
         schema
             .validateAsync(req.body, { abortEarly: false })
             .then((value) => {
-                logger.debug({ value });
                 req.body = value;
                 next();
             })
