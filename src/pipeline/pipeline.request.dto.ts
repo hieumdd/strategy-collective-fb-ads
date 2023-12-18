@@ -20,11 +20,13 @@ export const CreatePipelineTasksBodySchema = Joi.object<CreatePipelineTasksBody>
     end: Joi.string().optional().empty(null).allow(null).default(dayjs.utc().format('YYYY-MM-DD')),
 });
 
-type RunPipelineBody = PipelineOptions & { pipeline: keyof typeof pipelines };
+export type RunPipelineBody = PipelineOptions & { pipeline: keyof typeof pipelines };
 
 export const RunPipelineBodySchema = Joi.object<RunPipelineBody>({
-    accountId: Joi.string(),
-    start: Joi.string(),
-    end: Joi.string(),
-    pipeline: Joi.string(),
+    accountId: Joi.string().required(),
+    start: Joi.string().required(),
+    end: Joi.string().required(),
+    pipeline: Joi.string()
+        .valid(...Object.keys(pipelines))
+        .required(),
 });
