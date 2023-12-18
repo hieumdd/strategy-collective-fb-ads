@@ -7,8 +7,8 @@ describe('pipeline', () => {
         async (pipeline) => {
             return await runPipeline(pipeline, {
                 accountId: '306099495701257',
-                start: '2023-11-01',
-                end: '2024-12-01',
+                start: '2023-10-01',
+                end: '2023-11-01',
             })
                 .then((results) => expect(results).toBeDefined())
                 .catch((error) => {
