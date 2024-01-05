@@ -42,7 +42,10 @@ export const runPipeline = async (pipeline_: pipelines.Pipeline, options: Pipeli
 export const createInsightsPipelineTasks = async ({ start, end }: CreatePipelineTasksBody) => {
     logger.info({ fn: 'pipeline.service:createInsightsPipelineTasks', options: { start, end } });
 
-    const accounts = await getAccounts(322434115609975);
+    const accounts = await Promise.all([
+        getAccounts(322434115609975),
+        getAccounts(999458204024648),
+    ]).then((x) => x.flat());
 
     return await Promise.all([
         Object.keys(pipelines)
